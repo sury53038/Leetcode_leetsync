@@ -11,29 +11,32 @@
  */
 class Solution {
 public:
-    int xdepth, ydepth, x_parent, y_parent;
-    void check(TreeNode* root, int x, int y, int depth, int parent){
+    int x_level, y_level, xparent, yparent;
+
+    void traverse(TreeNode* root, int x, int y, int parent, int level){
         if(root == NULL) return;
 
         if(root->val == x){
-            xdepth = depth;
-            x_parent = parent;
+            x_level = level;
+            xparent = parent;
             return;
         }
-
         if(root->val == y){
-            ydepth = depth;
-            y_parent = parent;
+            y_level = level;
+            yparent = parent;
             return;
         }
-        check(root->left, x, y, depth+1, root->val);
-        check(root->right, x, y, depth+1, root->val);
+        traverse(root->left, x, y, root->val, level+1);
+        traverse(root->right, x, y, root->val, level+1);
     }
     bool isCousins(TreeNode* root, int x, int y) {
-        if(root->val == y || root->val == x) return false;
+        if(root->val == x || root->val == y){
+            return false;
+        }
 
-        check(root, x, y, 0, -1);
+        traverse(root, x, y, 0, 1);
+        
+        return(x_level == y_level && xparent != yparent);
 
-        return (xdepth == ydepth && x_parent != y_parent);
-    }
+    }   
 };
