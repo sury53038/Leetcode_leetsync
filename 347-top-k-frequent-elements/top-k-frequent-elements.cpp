@@ -6,17 +6,15 @@ public:
         for(int i = 0; i < nums.size(); i++){
             mpp[nums[i]]++;
         }
+        priority_queue<pair<int, int>>pq;
+
+        for(auto it : mpp){
+            pq.push({it.second, it.first});
+        }
         while(k > 0){
-            int temp = INT_MIN;
-            int cnt = 0;
-            for(auto it : mpp){
-                if(it.second > temp){
-                    temp = it.second;
-                    cnt = it.first;
-                }
-            }
-            mpp[cnt] = -1;
-            ans.push_back(cnt);
+            pair temp = pq.top();
+            ans.push_back(temp.second);
+            pq.pop();
             k--;
         }
         return ans;
