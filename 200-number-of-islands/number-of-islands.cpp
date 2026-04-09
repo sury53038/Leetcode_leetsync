@@ -19,24 +19,23 @@ public:
     }
     int numIslands(vector<vector<char>>& grid) {
         int counter = 0;
-        vector<pair<int,int>>colors;
+        // vector<pair<int,int>>colors;
         int m = grid.size();
         int n = grid[0].size();
 
-        for(int i = 0; i < m; i++){
-            for(int j = 0; j < n; j++){
+        // for(int i = 0; i < m; i++){
+        //     for(int j = 0; j < n; j++){
+        //         if(grid[i][j] == '1'){
+        //             colors.push_back({i,j});
+        //         }
+        //     }
+        // }
+        for(int i = 0; i < grid.size(); i++){
+            for(int j = 0; j < grid[0].size(); j++){
                 if(grid[i][j] == '1'){
-                    colors.push_back({i,j});
+                    counter++;
+                    dfs(grid, i, j);
                 }
-            }
-        }
-        for(int i = 0; i < colors.size(); i++){
-            int r = colors[i].first;
-            int c = colors[i].second;
-
-            if(grid[r][c] == '1'){
-                counter++;
-                dfs(grid, r, c);
             }
 
         }    
