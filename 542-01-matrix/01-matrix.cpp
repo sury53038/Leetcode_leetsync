@@ -33,7 +33,7 @@ public:
                     int rr = dr[k] + temp.first;
                     int cc = dc[k] + temp.second;
 
-                    if(rr >=0 && rr < m && cc >= 0 && cc < n && mat[rr][cc] == 1 && ans[rr][cc] == -1){
+                    if(rr >=0 && rr < m && cc >= 0 && cc < n && ans[rr][cc] == -1){
                         ans[rr][cc] = ans[temp.first][temp.second] + 1;
                         q.push({rr,cc});
                     }
