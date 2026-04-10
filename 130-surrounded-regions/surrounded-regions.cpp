@@ -14,14 +14,11 @@ public:
                 if(i == 0 || i == m-1 || j == 0 || j == n-1){
                     if(board[i][j] == 'O'){
                         q.push({i,j});
-                        grid[i][j] = 1;
+                        board[i][j] = '#';
                     }
                 }
             }
         }
-
-        
-
         while(!q.empty()){
             int size = q.size();
             for(int i = 0; i < size; i++){
@@ -33,18 +30,25 @@ public:
                     int cc = dc[k] + temp.second;
 
                     if(rr >= 0 && rr < m && cc >= 0 && cc < n && board[rr][cc] == 'O' && grid[rr][cc] == 0){
-                        grid[rr][cc] = 1;
+                        board[rr][cc] = '#';
                         q.push({rr,cc});
                     }
                 }
             }
         }
         for(int i = 0; i < m; i++){
-                for(int j = 0; j < n; j++){
-                    if(board[i][j] == 'O' && grid[i][j] == 0){
-                        board[i][j] = 'X';
-                    }
+            for(int j = 0; j < n; j++){
+                if(board[i][j] == 'O'){
+                    board[i][j] = 'X';
                 }
-            } 
+            }
+        }
+        for(int i = 0; i < m; i++){
+            for(int j = 0; j < n; j++){
+                if(board[i][j] == '#'){
+                    board[i][j] = 'O';
+                }
+            }
+        }
     }
 };
