@@ -6,7 +6,6 @@ public:
 
         int dr[4] = {0,0,-1,1};
         int dc[4] = {-1,1,0,0};
-        vector<vector<int>>grid(m, vector<int>(n));
         queue<pair<int,int>>q;
 
         for(int i = 0; i < m; i++){
@@ -29,7 +28,7 @@ public:
                     int rr = dr[k] + temp.first;
                     int cc = dc[k] + temp.second;
 
-                    if(rr >= 0 && rr < m && cc >= 0 && cc < n && board[rr][cc] == 'O' && grid[rr][cc] == 0){
+                    if(rr >= 0 && rr < m && cc >= 0 && cc < n && board[rr][cc] == 'O'){
                         board[rr][cc] = '#';
                         q.push({rr,cc});
                     }
