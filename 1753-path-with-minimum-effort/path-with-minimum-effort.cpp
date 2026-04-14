@@ -3,8 +3,6 @@ public:
     int minimumEffortPath(vector<vector<int>>& heights) {
         priority_queue<tuple<int,int,int>, vector<tuple<int,int,int>>, greater<tuple<int,int,int>>> pq;
  
-        int ans = INT_MAX, max_of_path = INT_MIN;
-
         int m = heights.size();
         int n = heights[0].size();
 
@@ -21,6 +19,7 @@ public:
             
             auto[wt, r, c] = pq.top();
             pq.pop();
+            if(wt > abs_dif[r][c]) continue;
             if(r == m-1 && c == n-1) return wt;
 
             for(int i = 0; i < 4; i++){
@@ -35,8 +34,6 @@ public:
                         abs_dif[rr][cc] = newEffort;
                         pq.push({newEffort, rr, cc});
                     }
-                    max_of_path = max(wt, dif);
-                    ans = min(ans, max_of_path);
                 }
             }
         }
