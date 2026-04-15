@@ -10,37 +10,37 @@ public:
 
             adj[s].push_back({d, wt});
         }
-        queue<pair<int,int>>pq;
+        priority_queue<tuple<int,int,int>, vector<tuple<int,int,int>>, greater<tuple<int,int,int>>>pq;
 
-        vector<int>costs(n, INT_MAX);
+        vector<vector<int>>costs(n, vector<int>(k+2, INT_MAX));
 
-        costs[src] = 0;
+        costs[src][0] = 0;
 
-        int stops = 0;
+        pq.push({0, src, 0});
 
-        pq.push({0, src});
+        while(!pq.empty()){
+        
+            auto[wt, node, stops] = pq.top();
+            pq.pop();
 
-        while(!pq.empty() && stops <= k){
-            int size = pq.size();
-            for(int i = 0; i < size; i++){
-                auto[wt, node] = pq.front();
-                pq.pop();
+            if(node == dst) return wt;
 
-                for(auto &nbr : adj[node]){
-                    int nbr_info = nbr.first;
-                    int nbr_cost = nbr.second;
+            if(stops > k) continue;
 
-                    int new_cost = nbr_cost + wt;
-                    
-                    if(costs[nbr_info] >  new_cost){
-                        costs[nbr_info] = new_cost;
-                        pq.push({new_cost, nbr_info});
-                    }
+            for(auto &nbr : adj[node]){
+                int nbr_info = nbr.first;
+                int nbr_cost = nbr.second;
+
+                int new_cost = nbr_cost + wt;
+                
+                if(costs[nbr_info][stops+1] >  new_cost){
+                    costs[nbr_info][stops+1] = new_cost;
+                    pq.push({new_cost, nbr_info, stops+1});
                 }
             }
-            stops++;
+
         }
-        if(costs[dst] == INT_MAX) return -1;
-        return costs[dst];
+        return -1;
+
     }
 };
