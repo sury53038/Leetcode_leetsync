@@ -19,8 +19,10 @@ public:
         while(!pq.empty()){
             auto [wt, node] = pq.top();
             pq.pop();
+            if(wt > dist[node]) continue;
 
             for(auto &nbr : adj[node]){
+                
                 int nbr_info = nbr.second;
                 int nbr_wt = nbr.first;
 
@@ -34,11 +36,9 @@ public:
         }
         int ans = INT_MIN;
         for(int i = 1; i < n+1; i++){
-            if(dist[i] > ans){
-                ans = dist[i];
-            }   
+            if(dist[i] == INT_MAX) return -1;
+            ans = max(ans,dist[i]); 
         }
-        if(ans == INT_MAX) return -1;
         return ans;
     }
 };
