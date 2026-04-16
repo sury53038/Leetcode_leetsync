@@ -1,46 +1,44 @@
 class Solution {
 public:
     int networkDelayTime(vector<vector<int>>& times, int n, int k) {
-        int m = times.size();
         vector<vector<pair<int,int>>>adj(n+1);
+        for(int i = 0; i < times.size(); i++){
+            int s = times[i][0];
+            int d = times[i][1];
+            int wt = times[i][2];
 
-        for(auto &ele : times){
-            int src = ele[0];
-            int dest = ele[1];
-            int time = ele[2];
-
-            adj[src].push_back({time, dest}); 
+            adj[s].push_back({wt, d});
         }
 
-        queue<vector<int>>q;
-        vector<int>time_taken(n+1, INT_MAX);
+        priority_queue<pair<int,int>, vector<pair<int,int>>, greater<pair<int,int>>>pq;
 
-        time_taken[k] = 0;
-        q.push({0, k});
+        vector<int>dist(n+1, INT_MAX);
+        dist[k] = 0;
+        pq.push({0,k});
 
-        while(!q.empty()){
-            auto f = q.front();
-            q.pop();
+        while(!pq.empty()){
+            auto [wt, node] = pq.top();
+            pq.pop();
 
-            int tem = f[0];
-            int node = f[1];
+            for(auto &nbr : adj[node]){
+                int nbr_info = nbr.second;
+                int nbr_wt = nbr.first;
 
-            for(auto &nbrs : adj[node]){
-                int nbr_info = nbrs.second;
-                int nbr_tem = nbrs.first;
+                int new_wt = nbr_wt + wt;
 
-                int new_tem = tem + nbr_tem;
-                if(new_tem < time_taken[nbr_info]){
-                    time_taken[nbr_info] = new_tem;
-                    q.push({new_tem, nbr_info});
+                if(new_wt < dist[nbr_info]){
+                    dist[nbr_info] = new_wt;
+                    pq.push({new_wt, nbr_info});
                 }
             }
         }
-        int maxi = INT_MIN;
+        int ans = INT_MIN;
         for(int i = 1; i < n+1; i++){
-            if(time_taken[i] > maxi) maxi = time_taken[i];
+            if(dist[i] > ans){
+                ans = dist[i];
+            }   
         }
-        if(maxi == INT_MAX) return -1;
-        return maxi;
+        if(ans == INT_MAX) return -1;
+        return ans;
     }
 };
