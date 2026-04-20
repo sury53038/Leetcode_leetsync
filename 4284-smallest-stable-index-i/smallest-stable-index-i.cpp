@@ -12,11 +12,8 @@ public:
             Max[i] = maxx;
         }
 
-        for(int i = 0; i < n; i++){
-            minn = INT_MAX;
-            for(int j = i; j < n; j++){
-                minn = min(minn, nums[j]);
-            }
+        for(int i = n-1; i >= 0; i--){
+            minn = min(minn, nums[i]);
             Min[i] = minn;
         }
         int ans = -1;
