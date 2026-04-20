@@ -12,7 +12,7 @@ public:
                 j++;
             }
             else{
-               i++;
+                i++;
             }
         }
         return ans;
