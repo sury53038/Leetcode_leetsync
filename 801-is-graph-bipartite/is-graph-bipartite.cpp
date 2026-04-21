@@ -4,7 +4,13 @@ public:
         color[node] = col;
         for(auto it : adj[node]){
             if(color[it] == -1){
-                if(dfs(it, !col, color, adj) == false) return false;
+                if(col == 0){
+                    if(dfs(it, 1, color, adj) == false) return false;
+                }
+                else{
+                    if(dfs(it, 0, color, adj) == false) return false;
+                }
+                
             }
             else if(color[it] == col) return false;
         }
