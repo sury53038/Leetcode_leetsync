@@ -10,8 +10,6 @@ public:
             if(moves[i] == 'R') cnt2++;
             if(moves[i] == '_') cnt3++;
         }
-        if(cnt1 == cnt2) return cnt3;
-        else if(cnt1 > cnt2) return (cnt1-cnt2+cnt3);
-        else return (cnt2-cnt1+cnt3);
+        return abs(cnt1-cnt2)+cnt3;
     }
 };
