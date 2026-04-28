@@ -25,7 +25,6 @@ public:
                     string new_ = wor;
                     if(new_ == endWord) return lev+1;
                     if(dict.find(new_) != dict.end()){
-                        cout<<new_<<"  ";
                         q.push({new_, lev+1});
                         dict.erase(new_);
                     }
