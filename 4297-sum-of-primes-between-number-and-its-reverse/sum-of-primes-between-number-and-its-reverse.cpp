@@ -1,40 +1,39 @@
 class Solution {
 public:
     int reverse(int n){
+        int x = n;
         int rev = 0;
-        while(n){
-            rev = rev*10 + (n % 10);
-            n /= 10;
+        while(x){
+            rev = rev*10 + (x % 10);
+            x = x/10;
         }
         return rev;
     }
-
+    
     int sumOfPrimesInRange(int n) {
         int rev = reverse(n);
+        int sum = 0;        
 
-        int L = min(n, rev);
-        int R = max(n, rev);
+        int s = min(rev, n);
+        int l = max(rev, n);
 
-        vector<bool> isPrime(R + 1, true);
+        vector<bool>isprime(l+1, true);
 
-        // Edge cases
-        if(R >= 0) isPrime[0] = false;
-        if(R >= 1) isPrime[1] = false;
+        isprime[0] = isprime[1] = false;
 
-        // Sieve
-        for(int i = 2; i * i <= R; i++){
-            if(isPrime[i]){
-                for(int j = i * i; j <= R; j += i){
-                    isPrime[j] = false;
+        for(int i = 2; i*i <= l; i++){
+            if(isprime[i]){
+                for(int j = i+i; j <= l; j += i){
+                    isprime[j] = false;
                 }
             }
         }
 
-        int sum = 0;
-        for(int i = L; i <= R; i++){
-            if(isPrime[i]) sum += i;
+        for(int i = s; i <= l; i++){
+            if(isprime[i] == true){
+                sum += i;
+            }
         }
-
         return sum;
     }
 };
