@@ -28,7 +28,6 @@ public:
 
         for(int i = min(n, rev); i <= max(n, rev); i++){
             if(isprime(i)){
-                cout<<i<<" ";
                 sum += i;
             }
         }
