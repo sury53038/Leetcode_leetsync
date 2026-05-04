@@ -1,7 +1,6 @@
 class Solution {
 public:
     vector<int> countOppositeParity(vector<int>& nums) {
-        vector<int>ans;
         int n = nums.size();
         bool parity = true;
         for(int i = 0; i < n; i++){
@@ -20,12 +19,12 @@ public:
                 }
             }
             if(parity){
-                ans.push_back(counter1);
+                nums[i] = counter1;
             }
             else{
-                ans.push_back(counter2);
+                nums[i] = counter2;
             }
         }
-        return ans;
+        return nums;
     }
 };
