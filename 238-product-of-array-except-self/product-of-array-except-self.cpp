@@ -22,19 +22,12 @@ public:
             mul = nums[i-1]*mul;
             left[i] = mul;
         }
-        cout<<"left"<<endl;
-        for(int i = 0; i < n; i++){
-            cout<<left[i]<<" ";
-        }
         mul = 1;
         for(int i = n-2; i >= 0; i--){
             mul = nums[i+1] * mul;
             right[i] = mul;
         }
-        cout<<"right"<<endl;
-        for(int i = 0; i < n; i++){
-            cout<<right[i]<<" ";
-        }
+        
         for(int i = 0; i < n; i++){
             if(i == 0){
                 ans[i] = right[i];
