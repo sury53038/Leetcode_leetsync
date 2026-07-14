@@ -11,7 +11,6 @@ class Solution:
         
         i = 0
         j = len(temp)-1
-        print(temp)
         while(i <= j):
             if(temp[i] != temp[j]):
                 return False
